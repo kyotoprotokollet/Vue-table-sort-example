@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <Ticket v-for="ticket in tickets" v-bind:key="ticket.id" :ticket="ticket"/>
+      <div class="tickets">
+            <Ticket v-for="ticket in tickets" v-bind:key="ticket.id" :ticket="ticket"/>
+      </div>
   </div>
 </template>
 
@@ -30,8 +32,7 @@ export default {
         // Use Axios to make an ajax request to our local data.
         axios.get('./data/data.json')
         .then(response => {
-            // Populate tickets and customers arrays with the response
-            this.customers = response.data.customers;
+            // Populate the tickets array with the response
             this.tickets = response.data.tickets;
         })
         .catch(e => {
@@ -42,9 +43,21 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+
+body {
+    background: rgb(224, 236, 235);
+}
+
+.tickets {
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
