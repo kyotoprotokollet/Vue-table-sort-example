@@ -13,7 +13,6 @@ $color-link--hover:     lighten($color-link, 10%);
 // Define media query breakpoints
 $breakpoints: (
     small      : 400px,
-    medium     : 900px,
-    large      : 1240px,
-    huge       : 1640px,
+    medium     : 700px,
+    large      : 900px,
 );

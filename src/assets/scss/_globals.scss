@@ -1,3 +1,18 @@
+@import "mini-reset";
 @import "variables";
 @import "mixins";
-@import "reset";
+
+
+/**
+ * Some global styles
+ */
+
+a {
+    color: $color-link;
+    transition: color .25s ease-out;
+    text-decoration: none;
+
+    &:hover {
+        color: $color-link--hover
+    }
+}

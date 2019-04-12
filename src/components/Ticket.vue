@@ -79,7 +79,7 @@ export default {
     background-color: white;
     padding: 20px;
     
-    @include respond-above("medium") {
+    @include respond-above("large") {
         display: grid;
         grid-template-columns: 2fr repeat(6, 3fr) max-content;
     }
@@ -103,7 +103,7 @@ export default {
         }
     }
 
-    @include respond-above("medium") {
+    @include respond-above("large") {
         display: block;
         padding: 0 10px;
         border-bottom: none;
@@ -138,14 +138,8 @@ export default {
     }
 }
 
-.ticket-section--id {
-    @include respond-above("medium") {
-        font-size: 90%;
-    }
-}
-
 .badge {
-    padding: 7px 10px;
+    padding: 5px 10px;
     background-color: rgb(49, 49, 49);
     color: white;
     border-radius: 10px;
