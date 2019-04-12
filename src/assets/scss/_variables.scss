@@ -1,0 +1,19 @@
+// Let's define some variables
+// ------------------------------------
+
+
+//--------------------------------------
+// Define app main colors
+$color-egg:             rgb(224, 236, 235);
+$color-text:            #2c3e50;
+$color-link:            rgb(15, 155, 101);
+$color-link--hover:     lighten($color-link, 10%);
+
+//--------------------------------------
+// Define media query breakpoints
+$breakpoints: (
+    small      : 400px,
+    medium     : 900px,
+    large      : 1240px,
+    huge       : 1640px,
+);
