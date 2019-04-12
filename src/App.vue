@@ -1,9 +1,35 @@
 <template>
-  <div id="app">
-      <div class="tickets">
-            <Ticket v-for="ticket in tickets" :key="ticket.id" :ticket="ticket"/>
-      </div>
-  </div>
+    <div id="app">
+        <table class="tickets">
+            <thead class="tickets__header">
+                <tr>
+                    <th>
+                        Ärendenummer
+                    </th>
+                    <th>
+                        Namn
+                    </th>
+                    <th class="text-right">
+                        Ansökt belopp
+                    </th>
+                    <th class="text-right">
+                        Beviljat belopp
+                    </th>
+                    <th class="text-right">
+                        Skapat
+                    </th>
+                    <th class="text-right">
+                        Senast ändrat
+                    </th>
+                    <th class="text-center">
+                        Status
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tr is="ticket" v-for="ticket in tickets" :key="ticket.id" :ticket="ticket"/>
+        </table>
+    </div>
 </template>
 
 <script>
@@ -52,10 +78,60 @@ body {
 }
 
 .tickets {
-    padding: 2.5vw;
+    display: block;
+    padding: 15px;
     max-width: 1500px;
+    width: 100%;
     margin: 0 auto;
-    font-size: 15px;
+    font-size: 14px;
+
+    @include respond-above("large") {
+        display: table;
+        padding: 0;
+    }
+
+    tr {
+        display: block;
+        background-color: white;
+        margin-bottom: 10px;
+        padding: 10px;
+
+        @include respond-above("large") {
+            display: table-row;
+            margin-bottom: 0;
+            padding: 0;
+        }
+    }
+}
+
+.tickets__header {
+    display: none;
+
+    @include respond-above("large") {
+        display: table-header-group;
+    }
+
+    th {
+        position: sticky;
+        top: 0;
+        background-color: white;
+        padding: 14px;
+        font-size: 12px;
+        color: grey;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+        border-bottom: 1px solid #ebebeb;
+        box-shadow: 0 5px 5px rgba(0,0,0,.02);
+
+        &.text-right {
+            text-align: right;
+        }
+        
+        &.text-center {
+            text-align: center;
+        }
+    }
 }
 
 #app {

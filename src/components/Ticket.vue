@@ -1,37 +1,37 @@
 <template>
-  <div class="ticket">
-    <div class="ticket-section ticket-section--id" data-label="Ärendenummer">
+  <tr class="ticket">
+    <td class="ticket-section ticket-section--id" data-label="Ärendenummer">
         <!-- I imagine this link leading to another view with details about this ticket -->
         # <a href="#">{{ ticket.id }}</a>
-    </div>
-    <div class="ticket-section" data-label="Kund">
+    </td>
+    <td class="ticket-section" data-label="Kund">
         {{ ticket.customer.name }}
-    </div>
-    <div class="ticket-section align-right" data-label="Ansökt belopp">
+    </td>
+    <td class="ticket-section align-right" data-label="Ansökt belopp">
         {{ formatNumber(ticket.requested_amount) }}
-    </div>
-    <div class="ticket-section align-right" data-label="Beviljat belopp">
+    </td>
+    <td class="ticket-section align-right" data-label="Beviljat belopp">
         {{ formatNumber(ticket.granted_amount) }}
-    </div>
-    <div class="ticket-section align-right" data-label="Påbörjat">
+    </td>
+    <td class="ticket-section align-right" data-label="Skapat">
         <span class="ticket-date">
             {{ formatDate(ticket.created_at) }}
         </span>
-    </div>
-    <div class="ticket-section align-right" data-label="Senaste handling">
+    </td>
+    <td class="ticket-section align-right" data-label="Senaste ändrat">
         <span class="ticket-date">
             {{ formatDate(ticket.updated_at) }}
         </span>
-    </div>
-    <div class="ticket-section align-center" data-label="Status">
+    </td>
+    <td class="ticket-section align-center" data-label="Status">
         <span class="badge" :class="ticket.status">
             {{ ticket.status }}
         </span>
-    </div>
-    <div class="ticket-section">
+    </td>
+    <td class="ticket-section">
         <button class="button--edit">Redigera</button>
-    </div>
-  </div>
+    </td>
+  </tr>
 </template>
 
 <script>
@@ -76,58 +76,31 @@ export default {
 @import "./src/assets/scss/_globals.scss";
 
 .ticket {
-    background-color: white;
-    padding: 20px;
-    
     @include respond-above("large") {
-        display: grid;
-        grid-template-columns: 2fr repeat(6, 3fr) max-content;
-    }
-
-    & + .ticket {
-        margin-top: 10px;
+            border-bottom: 1px solid #ebebeb;
     }
 }
 
 .ticket-section {
-    padding: 7px;
-    border-bottom: 1px solid #ebebeb;
-    font-size: 80%;
-    display: flex;
-    font-variant: common-ligatures tabular-nums;
+    padding: 15px;
+    background-color: white;
 
-    &[data-label] {
-        &:before {
-            content: attr(data-label);
-            width: 50%;
-        }
-    }
-
-    @include respond-above("large") {
-        display: block;
-        padding: 0 10px;
-        border-bottom: none;
-        position: relative;
-        font-size: 100%;
-        align-self: center;
-
-        &:after {
-            content: '';
-            display: block;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            width: 2px;
-            background-color: #ebebeb;
-        }
+    // On smaller viewports, lets display our data as a list
+    @include respond-below("large") {
+        display: flex;
+        padding: 10px;
+        border-bottom: 1px solid #ebebeb;
+        font-size: 80%;
 
         &[data-label] {
             &:before {
-                content: '';
+                content: attr(data-label);
+                width: 50%;
             }
         }
-
+     }
+    
+    @include respond-above("large") {
         &.align-right {
             text-align: right;
         }
@@ -135,7 +108,11 @@ export default {
         &.align-center {
             text-align: center;
         }
+        & + .ticket-section {
+            border-left: 1px solid #ebebeb;
+        }
     }
+
 }
 
 .badge {

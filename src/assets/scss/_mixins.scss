@@ -1,5 +1,5 @@
 // --------------------
-// Breakpoint mixin
+// Mixin for media queries above...
 @mixin respond-above($breakpoint) {
     @if map-has-key($breakpoints, $breakpoint) {
         $breakpoint-value: map-get($breakpoints, $breakpoint);
@@ -11,3 +11,16 @@
         @warn 'Invalid breakpoint: #{$breakpoint}.';
     }
 }
+
+// --------------------
+// Mixin for media queries below...
+@mixin respond-below($breakpoint) {
+    @if map-has-key($breakpoints, $breakpoint) {
+        $breakpoint-value: map-get($breakpoints, $breakpoint);
+        @media (max-width: ($breakpoint-value - 1)) {
+            @content;
+      }
+      } @else {
+        @warn 'Invalid breakpoint: #{$breakpoint}.';
+    }
+  }
