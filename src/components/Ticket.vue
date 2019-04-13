@@ -32,7 +32,7 @@
             {{ ticket.status }}
         </span>
     </td>
-    <td class="ticket-section">
+    <td class="ticket-section align-center">
         <button class="button--edit">Redigera</button>
     </td>
   </tr>
@@ -80,6 +80,10 @@ export default {
 <style lang="scss" scoped>
 @import "./src/assets/scss/_globals.scss";
 
+.buttonasda {
+    width: max-content;
+}
+
 .ticket {
     @include respond-above("large") {
             border-bottom: 1px solid #ebebeb;
@@ -92,15 +96,17 @@ export default {
 }
 
 .ticket-section {
-    padding: 15px;
+    // Set up a variable for padding, we will change it depending on viewport size, and maybe also allow the user to change it...
+    --ticketPadding: 10px;
+
+    padding: var(--ticketPadding);
     background-color: white;
+    font-size: 80%;
 
     // On smaller viewports, lets display our data as a list
     @include respond-below("large") {
         display: flex;
-        padding: 10px;
         border-bottom: 1px solid #ebebeb;
-        font-size: 80%;
 
         &[data-label] {
             &:before {
@@ -111,6 +117,8 @@ export default {
      }
     
     @include respond-above("large") {
+        font-size: 90%;
+
         &.align-right {
             text-align: right;
         }
@@ -121,6 +129,11 @@ export default {
         & + .ticket-section {
             border-left: 1px solid #ebebeb;
         }
+    }
+    @include respond-above("huge") {
+        --ticketPadding: 1rem;
+        font-size: 100%;
+
     }
 
 }

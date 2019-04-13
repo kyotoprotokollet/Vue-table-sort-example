@@ -35,7 +35,7 @@
                         <th class="text-center">
                             Status
                         </th>
-                        <th></th>
+                        <th class="button-column"></th>
                     </tr>
                 </thead>
                 <tr is="ticket" v-for="ticket in ticketsFinal" :key="ticket.id" :ticket="ticket"/>
@@ -100,12 +100,12 @@ export default {
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
 @import "./src/assets/scss/_globals.scss";
 
-:root {
-  --ticketPadding: 15px;
-}
-
 body {
     background-color: $color-egg;
+}
+
+.button-column {
+    width: 100px;
 }
 
 .ticket-component {
