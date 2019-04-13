@@ -25,7 +25,7 @@
             "customer": {
                 "id": 2,
                 "personal_identity_number": "790916-4522",
-                "name": "Therese Doe"
+                "name": "Simone de Beauvoir"
             }
         },
         {
@@ -43,7 +43,7 @@
             }
         },
         {
-            "id": 23904201,
+            "id": 234265,
             "status": "active",
             "requested_amount": 200000,
             "granted_amount": 200000,
@@ -53,11 +53,11 @@
             "customer": {
                 "id": 1,
                 "personal_identity_number": "760619-8930",
-                "name": "John Doe"
+                "name": "Ludwig Wittgenstein"
             }
         },
         {
-            "id": 2348922,
+            "id": 65724,
             "status": "completed",
             "requested_amount": 400000,
             "granted_amount": 300000,
@@ -67,11 +67,11 @@
             "customer": {
                 "id": 2,
                 "personal_identity_number": "790916-4522",
-                "name": "Therese Doe"
+                "name": "Karl Popper"
             }
         },
         {
-            "id": 23423,
+            "id": 6527,
             "status": "completed",
             "requested_amount": 1000000,
             "granted_amount": 500000,
@@ -81,11 +81,11 @@
             "customer": {
                 "id": 3,
                 "personal_identity_number": "400222-3794",
-                "name": "Karl Lagerfeldt"
+                "name": "Michael Sandel"
             }
         },
         {
-            "id": 23904201,
+            "id": 342432,
             "status": "active",
             "requested_amount": 200000,
             "granted_amount": 200000,
@@ -95,11 +95,11 @@
             "customer": {
                 "id": 1,
                 "personal_identity_number": "760619-8930",
-                "name": "John Doe"
+                "name": "David Chalmers"
             }
         },
         {
-            "id": 2348922,
+            "id": 803458372,
             "status": "completed",
             "requested_amount": 400000,
             "granted_amount": 300000,
@@ -109,11 +109,11 @@
             "customer": {
                 "id": 2,
                 "personal_identity_number": "790916-4522",
-                "name": "Therese Doe"
+                "name": "Thomas Nagel"
             }
         },
         {
-            "id": 23423,
+            "id": 1241244,
             "status": "completed",
             "requested_amount": 1000000,
             "granted_amount": 500000,
@@ -123,7 +123,63 @@
             "customer": {
                 "id": 3,
                 "personal_identity_number": "400222-3794",
-                "name": "Karl Lagerfeldt"
+                "name": "Martha Nussbaum"
+            }
+        },
+        {
+            "id": 11234,
+            "status": "completed",
+            "requested_amount": 1000000,
+            "granted_amount": 500000,
+            "comment": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "created_at": "2019-04-21 18:12:22",
+            "updated_at": "2019-01-29 20:01:03",
+            "customer": {
+                "id": 3,
+                "personal_identity_number": "400222-3794",
+                "name": "Michael Sandel"
+            }
+        },
+        {
+            "id": 9721,
+            "status": "active",
+            "requested_amount": 200000,
+            "granted_amount": 200000,
+            "comment": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam",
+            "created_at": "2019-01-01 09:12:32",
+            "updated_at": "2019-04-01 10:22:41",
+            "customer": {
+                "id": 1,
+                "personal_identity_number": "760619-8930",
+                "name": "David Chalmers"
+            }
+        },
+        {
+            "id": 333884,
+            "status": "completed",
+            "requested_amount": 400000,
+            "granted_amount": 300000,
+            "comment": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "created_at": "2019-01-02 12:12:45",
+            "updated_at": "2019-05-01 09:21:21",
+            "customer": {
+                "id": 2,
+                "personal_identity_number": "790916-4522",
+                "name": "Thomas Nagel"
+            }
+        },
+        {
+            "id": 1088236,
+            "status": "completed",
+            "requested_amount": 1000000,
+            "granted_amount": 500000,
+            "comment": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+            "created_at": "2019-04-21 18:12:22",
+            "updated_at": "2019-01-29 20:01:03",
+            "customer": {
+                "id": 3,
+                "personal_identity_number": "400222-3794",
+                "name": "Martha Nussbaum"
             }
         }
     ]
