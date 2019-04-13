@@ -1,41 +1,40 @@
 <template>
     <div id="app">
         <div class="ticket-component">
-            <div class="ticket-settings">
-                <ul class="ticket-pagination">
-                    <li class="pagination-button" v-for="page in pagination.totalPages">
-                        <a class="button" @click="pagination.currentPage = page">{{ page }}</a>
-                    </li>
-                </ul>
-            </div>
             <table class="tickets">
                 <thead class="tickets__header">
                     <tr>
-                        <th @click="sort('id')">
-                            Ärendenummer
+                        <th :class="{ active: sortColumn == 'id' }" @click="setSortSettings('id')">
+                            <span class="column-label">Ärende</span>
                         </th>
-                        <th @click="sort('name')">
-                            Namn
+                        <th :class="{ active: sortColumn == 'customer.name' }" @click="setSortSettings('customer.name')">
+                            <span class="column-label">Namn</span>
                         </th>
-                        <th>
-                            Personnummer
+                        <th :class="{ active: sortColumn == 'customer.personal_identity_number' }" @click="setSortSettings('customer.personal_identity_number')">
+                            Person nr.
                         </th>
-                        <th class="text-right" @click="sort('requested_amount')">
+                        <th :class="{ active: sortColumn == 'requested_amount' }" class="text-right" @click="setSortSettings('requested_amount')">
                             Ansökt belopp
                         </th>
-                        <th class="text-right" @click="sort('granted_amount')">
+                        <th :class="{ active: sortColumn == 'granted_amount' }" class="text-right" @click="setSortSettings('granted_amount')">
                             Beviljat belopp
                         </th>
-                        <th class="text-right" @click="sort('created_at')">
+                        <th :class="{ active: sortColumn == 'created_at' }" class="text-right" @click="setSortSettings('created_at')">
                             Skapat
                         </th>
-                        <th class="text-right" @click="sort('updated_at')">
+                        <th :class="{ active: sortColumn == 'updated_at' }" class="text-right" @click="setSortSettings('updated_at')">
                             Senast ändrat
                         </th>
-                        <th class="text-center" @click="sort('status')">
+                        <th :class="{ active: sortColumn == 'status' }"  class="text-center" @click="setSortSettings('status')">
                             Status
                         </th>
-                        <th class="button-column"></th>
+                        <th class="button-column">
+                            <ul class="ticket-pagination">
+                                <li class="pagination-button" v-for="page in pagination.totalPages">
+                                    <a class="button" @click="pagination.currentPage = page">{{ page }}</a>
+                                </li>
+                            </ul>
+                        </th>
                     </tr>
                 </thead>
                 <tr is="ticket" v-for="ticket in ticketsFinal" :key="ticket.id" :ticket="ticket"/>
@@ -46,7 +45,7 @@
 
 <script>
 import axios from 'axios'; // We use Axios to fetch our data
-import _ from 'lodash'; // We use lodash to sort some arrays
+import _ from 'lodash'; // We use lodash for easy array sorting
 import Ticket from './components/Ticket.vue'; // Our ticket component
 
 export default {
@@ -68,14 +67,15 @@ export default {
         Ticket
     },
     methods: {
-        // Return a sorted column
-        sort(columnName) {
+        // When clicking on a column name, set the sorting setting
+        setSortSettings(columnName) {
             //If this column is the active sorting column, reverse the sort direction
             if ( columnName == this.sortColumn ) {
                 this.sortColumnDirection = this.sortColumnDirection == 'asc' ? 'desc' : 'asc'
             }
             // Set the current sorting column to the column that the user clicked on
             this.sortColumn = columnName
+            //console.log(this.sortColumn, this.sortColumnDirection);
         },
 
         // Return a paginated array, using our pagination settings
@@ -87,15 +87,9 @@ export default {
         }
     },
     computed: {
-        // First we sort our tickets
+        // First we sort our tickets. This function reacts to our column sorting settings.
         ticketsSorted() {
-            return this.tickets.sort((a,b) => {
-                let modifier = 1
-                    if ( this.sortColumnDirection == 'desc' ) modifier = -1
-                    if (a[this.sortColumn] < b[this.sortColumn] ) return -1 * modifier
-                    if (a[this.sortColumn] > b[this.sortColumn] ) return 1 * modifier
-                return 0
-            });
+            return _.orderBy(this.tickets, this.sortColumn, this.sortColumnDirection); 
         },
         // The final data that we display. Paginate the sorted tickets.
         ticketsFinal() {
@@ -135,14 +129,6 @@ body {
     margin: 0 auto;
 }
 
-.ticket-settings {
-    display: flex;
-    background-color: white;
-    padding: 15px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-}
-
 .ticket-pagination {
     display: flex;
 }
@@ -176,27 +162,33 @@ body {
 
     @include respond-above("large") {
         display: table-header-group;
-    }
 
-    th {
-        position: sticky;
-        top: 0;
-        background-color: white;
-        padding: 14px;
-        font-size: 12px;
-        color: grey;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: .5px;
-        border-bottom: 1px solid #ebebeb;
-        box-shadow: 0 5px 5px rgba(0,0,0,.02);
+        th {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            padding: 14px;
+            font-size: 12px;
+            color: grey;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+            border-bottom: 1px solid #ebebeb;
+            box-shadow: 0 5px 5px rgba(0,0,0,.02);
+            cursor: pointer;
 
-        &.text-right {
-            text-align: right;
-        }
-        
-        &.text-center {
-            text-align: center;
+            &.active {
+               border-bottom: 1px solid teal;
+
+            }
+
+            &.text-right {
+                text-align: right;
+            }
+            
+            &.text-center {
+                text-align: center;
+            }
         }
     }
 }
