@@ -5,7 +5,11 @@
         # <a href="#">{{ ticket.id }}</a>
     </td>
     <td class="ticket-section" data-label="Kund">
-        {{ ticket.customer.name }}
+        <a href="#">{{ ticket.customer.name }}</a>
+    </td>
+    <td class="ticket-section" data-label="Personnummer">
+        <!-- I imagine this link leading to another view with details about this customer -->
+        <a href="#">{{ ticket.customer.personal_identity_number }}</a>
     </td>
     <td class="ticket-section align-right" data-label="Ansökt belopp">
         {{ formatNumber(ticket.requested_amount) }}
@@ -36,6 +40,7 @@
 
 <script>
 // Use the moment library to format the time
+// https://momentjs.com/
 import moment from 'moment';
 
 export default {
@@ -78,6 +83,11 @@ export default {
 .ticket {
     @include respond-above("large") {
             border-bottom: 1px solid #ebebeb;
+            &:hover {
+                .ticket-section {
+                    background-color: #f8f8f8;
+                }
+            }
     }
 }
 

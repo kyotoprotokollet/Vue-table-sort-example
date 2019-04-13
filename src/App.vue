@@ -9,6 +9,9 @@
                     <th>
                         Namn
                     </th>
+                    <th>
+                        Personnummer
+                    </th>
                     <th class="text-right">
                         Ansökt belopp
                     </th>
