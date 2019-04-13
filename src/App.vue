@@ -11,28 +11,28 @@
             <table class="tickets">
                 <thead class="tickets__header">
                     <tr>
-                        <th>
+                        <th @click="sort('id')">
                             Ärendenummer
                         </th>
-                        <th>
+                        <th @click="sort('name')">
                             Namn
                         </th>
                         <th>
                             Personnummer
                         </th>
-                        <th class="text-right">
+                        <th class="text-right" @click="sort('requested_amount')">
                             Ansökt belopp
                         </th>
-                        <th class="text-right">
+                        <th class="text-right" @click="sort('granted_amount')">
                             Beviljat belopp
                         </th>
-                        <th class="text-right">
+                        <th class="text-right" @click="sort('created_at')">
                             Skapat
                         </th>
-                        <th class="text-right">
+                        <th class="text-right" @click="sort('updated_at')">
                             Senast ändrat
                         </th>
-                        <th class="text-center">
+                        <th class="text-center" @click="sort('status')">
                             Status
                         </th>
                         <th class="button-column"></th>
@@ -46,14 +46,16 @@
 
 <script>
 import axios from 'axios'; // We use Axios to fetch our data
+import _ from 'lodash'; // We use lodash to sort some arrays
 import Ticket from './components/Ticket.vue'; // Our ticket component
 
 export default {
     name: 'app',
     data() {
         return {
-            loading: true,
             tickets: [],
+            sortColumn: 'name',
+            sortColumnDirection: 'asc', 
             pagination: {
                 totalPages: 1,
                 itemsPerPage: 8,
@@ -66,8 +68,18 @@ export default {
         Ticket
     },
     methods: {
+        // Return a sorted column
+        sort(columnName) {
+            //If this column is the active sorting column, reverse the sort direction
+            if ( columnName == this.sortColumn ) {
+                this.sortColumnDirection = this.sortColumnDirection == 'asc' ? 'desc' : 'asc'
+            }
+            // Set the current sorting column to the column that the user clicked on
+            this.sortColumn = columnName
+        },
+
         // Return a paginated array, using our pagination settings
-        paginateTickets: function (tickets, currentPage, itemsPerPage) {
+        paginateTickets(tickets, currentPage, itemsPerPage) {
             --currentPage;
             this.pagination.totalPages = Math.ceil(this.tickets.length / itemsPerPage);
             let paginatedTickets = tickets.slice(currentPage * itemsPerPage, (currentPage + 1) * itemsPerPage);
@@ -75,9 +87,19 @@ export default {
         }
     },
     computed: {
-        // The final data that we display
-        ticketsFinal: function () {
-            return this.paginateTickets(this.tickets, this.pagination.currentPage, this.pagination.itemsPerPage);
+        // First we sort our tickets
+        ticketsSorted() {
+            return this.tickets.sort((a,b) => {
+                let modifier = 1
+                    if ( this.sortColumnDirection == 'desc' ) modifier = -1
+                    if (a[this.sortColumn] < b[this.sortColumn] ) return -1 * modifier
+                    if (a[this.sortColumn] > b[this.sortColumn] ) return 1 * modifier
+                return 0
+            });
+        },
+        // The final data that we display. Paginate the sorted tickets.
+        ticketsFinal() {
+            return this.paginateTickets(this.ticketsSorted, this.pagination.currentPage, this.pagination.itemsPerPage);
         },
     },
     mounted() {

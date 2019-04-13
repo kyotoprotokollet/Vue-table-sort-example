@@ -39,7 +39,7 @@
 </template>
 
 <script>
-// Use the moment library to format the time
+// Use the moment library to format the time, we don't need to show it that exact I think...
 // https://momentjs.com/
 import moment from 'moment';
 
@@ -62,7 +62,7 @@ export default {
         formatDate(date) {
             return moment(date).format('YYYY-MM-DD')
         },
-        // Format the number to a more human readable version, omit decimals
+        // Format the loan amounts to a more human readable version, omit decimals
         formatNumber(number) {
             return number.toLocaleString('sv-SE', { 
                 style: 'currency', 
