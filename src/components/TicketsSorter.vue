@@ -82,6 +82,8 @@ export default {
             }
             // Set the current sorting column to the column that the user clicked on
             this.sortColumn = columnName
+            // Set the current page to the first page in the newly sorted array
+            this.pagination.currentPage = 1
         },
 
         // Return a paginated array, using our pagination settings
@@ -116,6 +118,7 @@ export default {
 @import "./src/assets/scss/_globals.scss";
 
 .tickets__header {
+    
     @include respond-below("large") {
         display: block;
     }
@@ -154,6 +157,8 @@ th {
     text-transform: uppercase;
     letter-spacing: .5px;
     position: relative;
+    background-color: white;
+    z-index: 5;
 
     &:not(.button-column) {
         &:after {
@@ -187,7 +192,7 @@ th {
     @include respond-above("large") {
         font-size: 12px;
         position: sticky;
-        top: 40px;
+        top: 0;
         border-bottom: 1px solid $color-border;
         box-shadow: 0 5px 5px rgba(0,0,0,.02);
 
@@ -205,7 +210,7 @@ th {
     }
 
     &.is-sortable {
-        cursor: ns-resize;
+        cursor: pointer;
     }
 }
 
@@ -218,6 +223,7 @@ th {
 .ticket-pagination__button {
     width: 24px;
     height: 24px;
+    background-color: white;
 
     & + .ticket-pagination__button {
         margin-left: 5px;

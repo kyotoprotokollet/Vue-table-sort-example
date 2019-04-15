@@ -129,7 +129,7 @@ export default {
 
     @include respond-above("large") {
         font-size: 95%;
-        padding: 1.25vw;
+        padding: 1.35vw 1.25vw;
 
         &.align-right {
             text-align: right;
@@ -144,7 +144,7 @@ export default {
     }
 
     @include respond-above("huge") {
-        padding: 1.25rem;
+        padding: 1.5rem 1.25rem;
         font-size: 100%;
     }
 }
@@ -169,6 +169,10 @@ export default {
 
     &.completed {
         background-color: #2ecc71;
+    }
+
+    &.chosen {
+        background-color: orange;
     }
 }
 
