@@ -7,8 +7,9 @@
  * Some global styles
  */
 
-// Reset button styles
+
 button {
+    // Reset button styles
     border: none;
     margin: 0;
     padding: 0;
@@ -31,7 +32,23 @@ button {
     /* Corrects inability to style clickable `input` types in iOS */
     -webkit-appearance: none;
 
+    // Custom button styles
     cursor: pointer;
+
+    &:disabled {
+        cursor: not-allowed;
+
+        &:hover,
+        &:focus {
+            svg {
+                fill: grey;
+            }
+        }
+        
+        svg {
+            fill: grey;
+        }
+    }
 
     svg {
         fill: $color-link;

@@ -1,7 +1,7 @@
 <template>
     <nav class="dropdown-menu">
         <ul>
-            <li><a href="#">Redigera ärende</a></li>
+            <li><a :href="`/tickets/${id}`">Redigera ärende</a></li>
             <li><a href="#">Klarmarkera</a></li>
             <li><a href="#">Släng</a></li>
         </ul> 
@@ -11,10 +11,8 @@
 <script>
 export default {
     name: 'DropDownMenu',
+    props: ['id'],
     data() {
-        return {
-            isVisible: false
-        }
     }
   }
 </script>
@@ -24,15 +22,15 @@ export default {
 
 .dropdown-menu {
     position: absolute;
-    background-color: white;
-    z-index: 1;
-    width: max-content;
     top: 40px;
     right: 0;
+    z-index: 1;
+    width: max-content;
+    background-color: white;
     box-shadow: 0 7px 11px rgba(0,0,0,.09);
 
     li + li {
-        border-top: 1px solid #ebebeb;
+        border-top: 1px solid $color-border;
     }
 
     a {

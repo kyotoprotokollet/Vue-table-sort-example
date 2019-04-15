@@ -1,29 +1,29 @@
 <template>
     <thead class="tickets__header">
         <tr>
-            <th class="is-sortable" :class="{ active: sortColumn == 'id', asc: sortColumnDirection == 'asc', desc: sortColumnDirection == 'desc' }" v-on:keyup.enter="setSortSettings('id')" @click="setSortSettings('id')" tabindex="0" >
-                <span class="column-label">Ärende</span>
+            <th class="is-sortable" :class="sortColumnClass('id')" v-on:keyup.enter="setSortSettings('id')" @click="setSortSettings('id')" tabindex="0" >
+                <div class="column-label">Ärende</div>
             </th>
-            <th class="is-sortable" :class="{ active: sortColumn == 'customer.name' }" v-on:keyup.enter="setSortSettings('customer.name')" @click="setSortSettings('customer.name')" tabindex="0" >
-                <span class="column-label">Namn</span>
+            <th class="is-sortable" :class="sortColumnClass('customer.name')" v-on:keyup.enter="setSortSettings('customer.name')" @click="setSortSettings('customer.name')" tabindex="0" >
+                <div class="column-label">Namn</div>
             </th>
-            <th class="is-sortable" :class="{ active: sortColumn == 'customer.personal_identity_number' }" v-on:keyup.enter="setSortSettings('customer.personal_identity_number')" @click="setSortSettings('customer.personal_identity_number')" tabindex="0" >
-                Person nr.
+            <th class="is-sortable" :class="sortColumnClass('customer.personal_identity_number')" v-on:keyup.enter="setSortSettings('customer.personal_identity_number')" @click="setSortSettings('customer.personal_identity_number')" tabindex="0" >
+                <div class="column-label">Person nr.</div>
             </th>
-            <th class="is-sortable text-right" :class="{ active: sortColumn == 'requested_amount' }" v-on:keyup.enter="setSortSettings('requested_amount')" @click="setSortSettings('requested_amount')" tabindex="0" >
-                Ansökt belopp
+            <th class="is-sortable text-right" :class="sortColumnClass('requested_amount')" v-on:keyup.enter="setSortSettings('requested_amount')" @click="setSortSettings('requested_amount')" tabindex="0" >
+                <div class="column-label">Ansökt belopp</div>
             </th>
-            <th class="is-sortable text-right" :class="{ active: sortColumn == 'granted_amount' }" v-on:keyup.enter="setSortSettings('granted_amount')" @click="setSortSettings('granted_amount')" tabindex="0" >
-                Beviljat belopp
+            <th class="is-sortable text-right" :class="sortColumnClass('granted_amount')"  v-on:keyup.enter="setSortSettings('granted_amount')" @click="setSortSettings('granted_amount')" tabindex="0" >
+                <div class="column-label">Beviljat belopp</div>
             </th>
-            <th class="is-sortable text-right" :class="{ active: sortColumn == 'created_at' }" v-on:keyup.enter="setSortSettings('created_at')" @click="setSortSettings('created_at')" tabindex="0" >
-                Skapat
+            <th class="is-sortable text-right" :class="sortColumnClass('created_at')" v-on:keyup.enter="setSortSettings('created_at')" @click="setSortSettings('created_at')" tabindex="0" >
+                <div class="column-label">Skapat</div>
             </th>
-            <th class="is-sortable text-right" :class="{ active: sortColumn == 'updated_at' }" v-on:keyup.enter="setSortSettings('updated_at')" @click="setSortSettings('updated_at')" tabindex="0" >
-                Senast ändrat
+            <th class="is-sortable text-right" :class="sortColumnClass('updated_at')" v-on:keyup.enter="setSortSettings('updated_at')" @click="setSortSettings('updated_at')" tabindex="0" >
+                <div class="column-label">Senast ändrat</div>
             </th>
-            <th class="is-sortable text-center" :class="{ active: sortColumn == 'status' }" v-on:keyup.enter="setSortSettings('status')" @click="setSortSettings('status')" tabindex="0" >
-                Status
+            <th class="is-sortable text-center" :class="sortColumnClass('status')" v-on:keyup.enter="setSortSettings('status')" @click="setSortSettings('status')" tabindex="0" >
+                <div class="column-label">Status</div>
             </th>
             <th class="button-column">
                 <div class="ticket-pagination">
@@ -66,6 +66,14 @@ export default {
         }
     },
     methods: {
+        // Return classes on sortable table header depending on active column and desc/asc
+        sortColumnClass(columnName) {
+            return {
+                active: this.sortColumn == columnName,
+                asc: this.sortColumn == columnName && this.sortColumnDirection == 'asc',
+                desc: this.sortColumn == columnName && this.sortColumnDirection == 'desc'
+            }
+        },
         // When clicking on a column name, set the sorting settings
         setSortSettings(columnName) {
             //If this column is the active sorting column, reverse the sort direction
@@ -115,33 +123,76 @@ export default {
     tr {
         @include respond-below("large") {
             display: grid;
-            grid-template-columns: repeat( auto-fit, 20% );
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            justify-content: center;
         }
     }
 }
 
+.column-label {
+    padding: 10px;
+    margin-right: 20px;
+
+    @include respond-above("large") {
+        padding: 20px;   
+    }
+}
+
+.button-column {
+    padding: 10px;
+
+    @include respond-above("large") {
+        padding: 20px;   
+        width: 100px;
+    }
+}
+
 th {
-    padding: .5rem;
     font-size: 11px;
     color: grey;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .5px;
+    position: relative;
 
-    &.is-sortable {
-        cursor: pointer;
+    &:not(.button-column) {
+        &:after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 100%;
+            top: 0;
+            right: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &.asc:after {
+            content: '\25bc';
+        }
+
+        &.desc:after {
+            content: '\25b2';
+        }
+    }
+
+    @include respond-below("large") {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
     }
 
     @include respond-above("large") {
         font-size: 12px;
-        padding: 1rem;    
         position: sticky;
         top: 40px;
         border-bottom: 1px solid $color-border;
         box-shadow: 0 5px 5px rgba(0,0,0,.02);
 
         &.active {
-            border-bottom: 1px solid teal;
+            border-bottom: 1px solid $color-link;
         }
 
         &.text-right {
@@ -151,30 +202,22 @@ th {
         &.text-center {
             text-align: center;
         }
+    }
 
-        &.button-column {
-            width: 100px;
-        }
+    &.is-sortable {
+        cursor: ns-resize;
     }
 }
 
 .ticket-pagination {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
-
-
 
 .ticket-pagination__button {
     width: 24px;
     height: 24px;
-
-    &:disabled {
-        cursor: not-allowed;
-        svg {
-            fill: grey;
-        }
-    }
 
     & + .ticket-pagination__button {
         margin-left: 5px;
@@ -184,6 +227,4 @@ th {
         transform: rotate(180deg);
     }
 }
-
-
 </style>
