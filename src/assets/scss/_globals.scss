@@ -35,7 +35,8 @@ button {
 
     svg {
         fill: $color-link;
-        
+        transition: .25s fill ease-out;
+
         &:hover,
         &:focus {
             fill: $color-link--hover;

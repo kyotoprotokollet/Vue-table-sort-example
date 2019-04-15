@@ -1,5 +1,5 @@
 <template>
-  <tr class="ticket">
+  <tr class="ticket-row">
     <td class="ticket-section ticket-section--id" data-label="Ärendenummer">
         <!-- I imagine this link leading to another view with details about this ticket -->
         # <a href="#">{{ ticket.id }}</a>
@@ -90,10 +90,14 @@ export default {
 <style lang="scss" scoped>
 @import "./src/assets/scss/_globals.scss";
 
-.ticket {
+.ticket-row {
     position: relative;
+    background-color: white;
+
     @include respond-above("large") {
-        border-bottom: 1px solid #ebebeb;
+        border-bottom: 1px solid $color-border;
+        position: static;
+
         &:hover {
             .ticket-section {
                 background-color: #f8f8f8;
@@ -103,17 +107,13 @@ export default {
 }
 
 .ticket-section {
-    // Set up a variable for padding, we will change it depending on viewport size, and maybe also allow the user to change it...
-    --ticketPadding: 10px;
-
-    padding: var(--ticketPadding);
-    background-color: white;
-    font-size: 80%;
+    padding: 10px;
+    font-size: 85%;
 
     // On smaller viewports, lets display our data as a list
     @include respond-below("large") {
         display: flex;
-        border-bottom: 1px solid #ebebeb;
+        border-bottom: 1px solid $color-border;
 
         &[data-label] {
             &:before {
@@ -123,8 +123,13 @@ export default {
         }
      }
     
-    @include respond-above("large") {
+    @include respond-above("medium") {
         font-size: 90%;
+    }
+
+    @include respond-above("large") {
+        font-size: 95%;
+        padding: 1.25vw;
 
         &.align-right {
             text-align: right;
@@ -134,11 +139,12 @@ export default {
             text-align: center;
         }
         & + .ticket-section {
-            border-left: 1px solid #ebebeb;
+            border-left: 1px solid $color-border;
         }
     }
+
     @include respond-above("huge") {
-        --ticketPadding: 1rem;
+        padding: 1.25rem;
         font-size: 100%;
     }
 }
