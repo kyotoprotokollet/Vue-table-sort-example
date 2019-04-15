@@ -139,12 +139,12 @@ body {
 
 .tickets {
     display: block;
-    width: 100%;
     font-size: 14px;
 
     @include respond-above("large") {
         display: table;
         table-layout: fixed;
+        width: 100%;
     }
 
     tr {
@@ -162,7 +162,14 @@ body {
 }
 
 .tickets__header {
-    display: none;
+    display: block;
+
+    @include respond-below("large") {
+        tr {
+            display: grid;
+            grid-template-columns: repeat( auto-fit, minmax(100px, 1fr) );
+        }
+    }
 
     @include respond-above("large") {
         display: table-header-group;
@@ -170,17 +177,20 @@ body {
 }
 
 th {
-    position: sticky;
-    top: 40px;
-    background-color: white;
     padding: 1rem;
     font-size: 11px;
     color: grey;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: .5px;
-    border-bottom: 1px solid #ebebeb;
-    box-shadow: 0 5px 5px rgba(0,0,0,.02);
+
+    @include respond-above("large") {
+        position: sticky;
+        top: 40px;
+        background-color: white;
+        border-bottom: 1px solid #ebebeb;
+        box-shadow: 0 5px 5px rgba(0,0,0,.02);
+    }
 
     &.is-sortable {
         cursor: pointer;
@@ -228,6 +238,7 @@ th {
     }
 
     &:disabled {
+        cursor: not-allowed;
         svg {
             fill: grey;
         }
