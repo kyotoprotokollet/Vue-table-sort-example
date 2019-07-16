@@ -1,29 +1,20 @@
-# ticket-list
+# Ticket component for Consector
 
 ## Project setup
+To run this project you need to have Node, NPM and Vue CLI on your computer. 
+Once that is installed, go into the Ticket-list folder and, from the terminal, run:
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### Then you can run
 ```
 npm run serve
 ```
+
+Now you can visit the app on your local machine or network. See the terminal for URL.
 
 ### Compiles and minifies for production
 ```
 npm run build
 ```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

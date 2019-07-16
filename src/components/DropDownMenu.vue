@@ -11,9 +11,7 @@
 <script>
 export default {
     name: 'DropDownMenu',
-    props: ['id'],
-    data() {
-    }
+    props: ['id']
   }
 </script>
 
