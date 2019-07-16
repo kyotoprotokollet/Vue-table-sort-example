@@ -1,4 +1,4 @@
-# Ticket component for Consector
+# Ticket component
 
 ## Project setup
 To run this project you need to have Node, NPM and Vue CLI on your computer. 
